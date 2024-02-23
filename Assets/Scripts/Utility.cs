@@ -16,4 +16,9 @@ public static class Utility
         return other.layer == LayerMask.NameToLayer("fwc") &&
                Mathf.Abs(getAngle(other)) < 1;
     }
+
+    public static float AbsDiff(float a, float b)
+    {
+        return Mathf.Abs(a - b);
+    }
 }
