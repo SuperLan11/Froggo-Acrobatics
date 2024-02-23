@@ -329,6 +329,7 @@ GameObject:
   - component: {fileID: 1497237827}
   - component: {fileID: 1497237828}
   - component: {fileID: 1497237829}
+  - component: {fileID: 1497237830}
   m_Layer: 7
   m_Name: bodybox
   m_TagString: Untagged
@@ -399,6 +400,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1497237830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497237826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e90d11598246426999a0d0a39d6e1f6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &17145427999511574
 GameObject:
   m_ObjectHideFlags: 0
