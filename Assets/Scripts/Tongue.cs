@@ -7,7 +7,7 @@ public class Tongue : MonoBehaviour
     public Vector2 start;
     public Vector2 end;
 
-    void Update()
+    public void Update()
     {
         float angle = Vector2.SignedAngle(Vector2.up, end - start);
         transform.rotation = Quaternion.Euler(0, 0, angle);
