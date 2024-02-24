@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Vine : MonoBehaviour
 {
+    public HingeJoint2D hangJoint;
     public HingeJoint2D grabJoint;
     public GameObject grabSpot;
     
@@ -11,5 +12,11 @@ public class Vine : MonoBehaviour
         {
             col.gameObject.GetComponentInParent<Frog>().GrabVine(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        grabJoint.anchor = new Vector2(0, -GetComponent<SpriteRenderer>().size.y / 2);
+        hangJoint.anchor = new Vector2(0, GetComponent<SpriteRenderer>().size.y / 2);
     }
 }

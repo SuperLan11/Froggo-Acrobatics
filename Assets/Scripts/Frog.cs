@@ -33,6 +33,7 @@ public class Frog : MonoBehaviour
         armLegDistance = Mathf.Abs(armSpot.transform.position.x - legSpot.transform.position.x);
         respawnPoint = transform.position;
         Time.timeScale = defaultTimeScale;
+        gravityScale = rb.gravityScale;
     }
 
     private bool leftPressed;
@@ -71,6 +72,7 @@ public class Frog : MonoBehaviour
         tongueActive = true;
         tongueTarget = pos;
         tongueRetracting = false;
+        tongue.Update();
     }
 
     public float tongueProgressRate = 0.4f;
@@ -103,7 +105,7 @@ public class Frog : MonoBehaviour
 
     public void OnTongueCollide(GameObject other)
     {
-        //Time.timeScale = 0.2f;
+        Time.timeScale = 0.2f;
         if (state == State.TongueGrappling || prevState == State.TongueGrappling || state == State.WallTethering || state == State.Hanging)
         {
             return;
@@ -115,6 +117,7 @@ public class Frog : MonoBehaviour
             state = State.TongueGrappling;
             left = other.transform.position.x < transform.position.x;
             AdjustFlip();
+            UpdateTongue();
         }
         else
         {
@@ -151,10 +154,7 @@ public class Frog : MonoBehaviour
     {
         //Debug.Log(state.ToString());
         tongue.gameObject.SetActive(tongueActive);
-        if (tongueActive)
-        {
-            UpdateTongue();
-        }
+        
 
         if (state == State.TongueGrappling)
         {
@@ -163,9 +163,14 @@ public class Frog : MonoBehaviour
             float angle = Vector2.SignedAngle(left ? Vector2.left : Vector2.right, direction);
             transform.rotation = Quaternion.Euler(0, 0, angle);
         }
+        if (tongueActive)
+        {
+            UpdateTongue();
+        }
         
         if (state is State.Idle or State.WallTethered or State.Landing or State.Hanging or State.WallTethering) //HHH
         {
+            lastGrabbedVine = null;
             airtime = 0;
         }
 
@@ -251,10 +256,10 @@ public class Frog : MonoBehaviour
                 rb.AddForce(airtimeHorizontalMovementForce * Vector2.right);
             }
         }
-        
+
         //HHH
         GetComponent<Collider2D>().enabled = state != State.WallTethering;
-        rb.gravityScale = state is State.WallTethered or State.TongueGrappling ? 0 : 1;
+        rb.gravityScale = state is State.WallTethered or State.TongueGrappling ? 0 : gravityScale;
         rb.freezeRotation = state is State.WallTethered;// or State.TongueGrappling;
         bool freezePosition = state == State.WallTethered;
         if (freezePosition)
@@ -331,6 +336,7 @@ public class Frog : MonoBehaviour
     public float floorJumpStrength = 250;
     public float vineSpin;
     private Vector2 jumpVector;
+    private float gravityScale = 0;
     void Jump()
     {
         if (state == State.TongueGrappling)
@@ -385,6 +391,10 @@ public class Frog : MonoBehaviour
     public void GrabVine(GameObject vine)
     {
         Vine v = vine.GetComponent<Vine>();
+        if (lastGrabbedVine == v)
+        {
+            return;
+        }
         v.grabJoint.connectedBody = rb;
         v.grabJoint.connectedAnchor = transform.InverseTransformPoint(armSpot.transform.position);
         state = State.Hanging;
@@ -397,7 +407,7 @@ public class Frog : MonoBehaviour
     private void UngrabVine()
     {
         state = State.Airborne;
-        lastGrabbedVine.grabJoint.enabled = false;
+        if (lastGrabbedVine != null) lastGrabbedVine.grabJoint.enabled = false;
     }
 
     private Vector2 respawnPoint;
