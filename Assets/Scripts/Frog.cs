@@ -39,6 +39,12 @@ public class Frog : MonoBehaviour
     private bool leftPressed;
     private bool rightPressed;
 
+    IEnumerator AdjustFlipLater()
+    {
+        yield return new WaitForFixedUpdate();
+        AdjustFlip();
+    }
+
     void Update()
     {
         if (state is State.Idle or State.WallTethered or State.TongueGrappling or State.Hanging) { //HHH
@@ -101,6 +107,7 @@ public class Frog : MonoBehaviour
         {
             EndTongue();
         }
+        tongue.Update();
     }
 
     public void OnTongueCollide(GameObject other)
@@ -115,7 +122,7 @@ public class Frog : MonoBehaviour
         {
             state = State.TongueGrappling;
             left = other.transform.position.x < transform.position.x;
-            AdjustFlip();
+            StartCoroutine(AdjustFlipLater());
             UpdateTongue();
         }
         else
@@ -141,6 +148,10 @@ public class Frog : MonoBehaviour
     {
         float scaleX = left ? -1 : 1;
         transform.localScale = new Vector3(scaleX, transform.localScale.y, 1);
+        if (state == State.TongueGrappling)
+        {
+            UpdateTongue();
+        }
     }
 
     private State prevState = State.Idle;
