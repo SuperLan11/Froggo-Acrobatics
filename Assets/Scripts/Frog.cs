@@ -104,14 +104,16 @@ public class Frog : MonoBehaviour
 
     public void OnTongueCollide(GameObject other)
     {
-        if (state == State.TongueGrappling || prevState == State.TongueGrappling)
+        Time.timeScale = 0.2f;
+        if (state == State.TongueGrappling || prevState == State.TongueGrappling || state == State.WallTethering)
         {
             return;
         }
-        //Debug.Log("here");
+        Debug.Log("here");
         if (Utility.IsWall(other))
         {
             state = State.TongueGrappling;
+            left = other.transform.position.x < transform.position.x;
         }
     }
 
@@ -146,7 +148,10 @@ public class Frog : MonoBehaviour
 
         if (state == State.TongueGrappling)
         {
-            rb.velocity = (tongue.end - tongue.start).normalized * 10f;
+            rb.velocity = (tongue.end - (Vector2)transform.position).normalized * 10f;
+            Vector2 direction = (tongue.end - (Vector2)transform.position).normalized;
+            float angle = Vector2.SignedAngle(left ? Vector2.left : Vector2.right, direction);
+            transform.rotation = Quaternion.Euler(0, 0, angle);
         }
         
         if (state is State.Idle or State.WallTethered or State.Landing) //HHH
@@ -235,7 +240,7 @@ public class Frog : MonoBehaviour
         //HHH
         GetComponent<Collider2D>().enabled = state != State.WallTethering;
         rb.gravityScale = state is State.WallTethered or State.TongueGrappling ? 0 : 1;
-        rb.freezeRotation = state is State.WallTethered or State.TongueGrappling;
+        rb.freezeRotation = state is State.WallTethered;// or State.TongueGrappling;
         bool freezePosition = state == State.WallTethered;
         if (freezePosition)
         {

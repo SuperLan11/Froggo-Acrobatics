@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 13723149}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: right leg solver_Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,6 +154,63 @@ Transform:
   m_Father: {fileID: 950315044}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+--- !u!1001 &186765665
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6621293406535232948, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
+      propertyPath: m_Name
+      value: wall (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
 --- !u!1 &433333030
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +220,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 433333031}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: arm spot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 490820132}
   - component: {fileID: 490820133}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: left leg solver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,71 +411,6 @@ PositionConstraint:
   m_Sources:
   - sourceTransform: {fileID: 1082812514}
     weight: 1
---- !u!1001 &598326054
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6621293406535232948, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_Name
-      value: wall (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 12.29
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -6.24
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -90
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
 --- !u!1001 &763449221
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -429,6 +421,10 @@ PrefabInstance:
     - target: {fileID: 5728675267740461479, guid: 3a4682269f868bc438bcbf242e028d4d, type: 3}
       propertyPath: m_Name
       value: Tongue
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728675267740461479, guid: 3a4682269f868bc438bcbf242e028d4d, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7941043702297529727, guid: 3a4682269f868bc438bcbf242e028d4d, type: 3}
       propertyPath: m_RootOrder
@@ -506,7 +502,7 @@ GameObject:
   m_Component:
   - component: {fileID: 950315044}
   - component: {fileID: 950315045}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: right leg solver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -570,7 +566,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 983289747}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: left leg solver_Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -605,7 +601,7 @@ GameObject:
   - component: {fileID: 1082812517}
   - component: {fileID: 1082812516}
   - component: {fileID: 1082812515}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: bodybox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -722,7 +718,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1264621064}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: mouth spot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -755,77 +751,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall
       objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232949, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_AutoTiling
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232949, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_SpriteTilingProperty.drawMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232949, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 17.18
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232949, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232949, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
-      value: 0.028
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232950, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_FlipX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232950, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_FlipY
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232950, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_Size.x
-      value: 17.18
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232950, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 2c003ba871c83bc49a32a4288bd29561, type: 3}
-    - target: {fileID: 6621293406535232950, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232950, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232950, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232950, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_DrawMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232950, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_SpriteTileMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232950, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_AdaptiveModeThreshold
-      value: 0.028
-      objectReference: {fileID: 0}
     - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
       propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -833,7 +761,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.298655
+      value: 6.36
       objectReference: {fileID: 0}
     - target: {fileID: 6621293406535232951, guid: d2dcd1cc67331024ab9130a07ba79ffa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -878,7 +806,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1536742078}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg spot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -909,7 +837,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1554454523}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: solvers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1093,7 +1021,7 @@ GameObject:
   - component: {fileID: 1997658115968334848}
   - component: {fileID: 3977521311541328553}
   - component: {fileID: 2322189869190354870}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: right_arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1109,7 +1037,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6809248519171979534}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: front leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1127,7 +1055,7 @@ GameObject:
   - component: {fileID: 6097555677453755943}
   - component: {fileID: 8074310687025574272}
   - component: {fileID: 2259256698924415881}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: left_bottom_leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1145,7 +1073,7 @@ GameObject:
   - component: {fileID: 7245961330234696606}
   - component: {fileID: 7465026483741396379}
   - component: {fileID: 7780201885837939367}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1163,7 +1091,7 @@ GameObject:
   - component: {fileID: 3464978400861008976}
   - component: {fileID: 2621166204600921613}
   - component: {fileID: 6668094183399240589}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: right_bottom_leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1196,7 +1124,7 @@ GameObject:
   - component: {fileID: 8143305858322728219}
   - component: {fileID: 4302536279557746548}
   - component: {fileID: 7155404741121606943}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: left_middle_leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1343,7 +1271,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8595515931473712065}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: left foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1359,7 +1287,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6473407439697543763}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1427,7 +1355,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6096466700820143242}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: front foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1510,7 +1438,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8972425178614782665}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: bone_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1528,7 +1456,7 @@ GameObject:
   - component: {fileID: 1647138089606821871}
   - component: {fileID: 3568524188128001857}
   - component: {fileID: 2196148715446865860}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: left_top_leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1596,7 +1524,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8947441459397790860}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: left leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1681,7 +1609,7 @@ GameObject:
   - component: {fileID: 7536604853798670418}
   - component: {fileID: 8365899345190157524}
   - component: {fileID: 5800101386182245474}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: right_middle_leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1697,7 +1625,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2093866842413168911}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: bone_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1766,7 +1694,7 @@ GameObject:
   - component: {fileID: 8407667757396851814}
   - component: {fileID: 7144724431113776280}
   - component: {fileID: 8838884786103732564}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: right_top_leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1806,7 +1734,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6621293406535232951, guid: a46e65db0a9d7c147ba71fb11fa3386a, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6621293406535232951, guid: a46e65db0a9d7c147ba71fb11fa3386a, type: 3}
       propertyPath: m_LocalScale.x
@@ -1888,7 +1816,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2260207009185859949}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: bone_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2008,7 +1936,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4351302959039912779}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: bone_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2112,7 +2040,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9022766971423200229}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hookFrog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2367,7 +2295,7 @@ GameObject:
   - component: {fileID: 8615506146850239542}
   - component: {fileID: 8406170839846912043}
   - component: {fileID: 2364863645378359727}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: left_arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2429,5 +2357,5 @@ Transform:
   - {fileID: 8615506146850239542}
   - {fileID: 1082812514}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
