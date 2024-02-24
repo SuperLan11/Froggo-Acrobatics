@@ -105,7 +105,6 @@ public class Frog : MonoBehaviour
 
     public void OnTongueCollide(GameObject other)
     {
-        Time.timeScale = 0.2f;
         if (state == State.TongueGrappling || prevState == State.TongueGrappling || state == State.WallTethering || state == State.Hanging)
         {
             return;
