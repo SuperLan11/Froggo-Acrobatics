@@ -10,9 +10,17 @@ public class Frog : MonoBehaviour
     public GameObject legTargets;
     public Tongue tongue;
     public GameObject mouthSpot;
+
     enum State
     {
-        Idle, Jumping, Airborne, WallTethering, WallTethered, Landing, TongueGrappling, Hanging
+        Idle,
+        Jumping,
+        Airborne,
+        WallTethering,
+        WallTethered,
+        Landing,
+        TongueGrappling,
+        Hanging
     }
 
     public GameObject armSpot;
@@ -27,6 +35,7 @@ public class Frog : MonoBehaviour
     }
 
     private State state = State.Idle;
+
     void Start()
     {
         targetStartLocalPos = legTargets.transform.localPosition;
@@ -44,11 +53,14 @@ public class Frog : MonoBehaviour
         yield return new WaitForFixedUpdate();
         AdjustFlip();
     }
+
     public float tongueReachMultiplier = 2f;
 
     void Update()
     {
-        if (state is State.Idle or State.WallTethered or State.TongueGrappling or State.Hanging) { //HHH
+        if (state is State.Idle or State.WallTethered or State.TongueGrappling or State.Hanging)
+        {
+            //HHH
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Jump();
@@ -57,7 +69,7 @@ public class Frog : MonoBehaviour
 
         //tongue.start = mouthSpot.transform.position;
         //tongue.end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        
+
         leftPressed = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
         rightPressed = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
 
@@ -67,7 +79,7 @@ public class Frog : MonoBehaviour
             Vector2 end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 start = mouthSpot.transform.position;
             Vector2 diff = end - start;
-            end = start + diff*tongueReachMultiplier;
+            end = start + diff * tongueReachMultiplier;
             StartTongue(end);
         }
     }
@@ -88,6 +100,7 @@ public class Frog : MonoBehaviour
 
     public float tongueProgressRate = 0.4f;
     public float tongueMaxLength = 6f;
+
     private void UpdateTongue()
     {
         Vector2 nextPos;
@@ -98,33 +111,43 @@ public class Frog : MonoBehaviour
         else if (tongueRetracting)
         {
             nextPos = Vector2.MoveTowards(tongue.end, mouthSpot.transform.position, tongueProgressRate);
-        } else {
+        }
+        else
+        {
             nextPos = Vector2.MoveTowards(tongue.end, tongueTarget, tongueProgressRate);
         }
+
         tongue.start = mouthSpot.transform.position;
         tongue.end = nextPos;
-        
-        if (!tongueRetracting && Vector2.Distance(tongue.end, tongueTarget) < 0.1f || Vector2.Distance(tongue.end, tongue.start) > tongueMaxLength)
+
+        if (!tongueRetracting && Vector2.Distance(tongue.end, tongueTarget) < 0.1f ||
+            Vector2.Distance(tongue.end, tongue.start) > tongueMaxLength)
         {
             tongueRetracting = true;
         }
+
         if (tongueRetracting && Vector2.Distance(tongue.end, mouthSpot.transform.position) < 0.1f)
         {
             EndTongue();
         }
+
         tongue.Update();
     }
 
     public void OnTongueCollide(GameObject other)
     {
-        if (state == State.TongueGrappling || prevState == State.TongueGrappling || state == State.WallTethering || state == State.Hanging)
+        if (state == State.TongueGrappling || prevState == State.TongueGrappling || state == State.WallTethering ||
+            state == State.Hanging)
         {
             return;
         }
-        
-        Debug.Log("here");
+
         if (Utility.IsWall(other) && !other.gameObject.CompareTag("NonClingable"))
         {
+            if (state == State.WallTethered)
+            {
+                StartCoroutine(TemporarilyDisableCollision());
+            }
             state = State.TongueGrappling;
             left = other.transform.position.x < transform.position.x;
             StartCoroutine(AdjustFlipLater());
@@ -142,7 +165,10 @@ public class Frog : MonoBehaviour
     }
 
     private int airtime = 0;
-    [FormerlySerializedAs("jumpLegAnimationTime")] [FormerlySerializedAs("JUMP_LEG_ANIMATION_TIME")] public int jumpingTime;
+
+    [FormerlySerializedAs("jumpLegAnimationTime")] [FormerlySerializedAs("JUMP_LEG_ANIMATION_TIME")]
+    public int jumpingTime;
+
     private Vector3 targetStartLocalPos;
     public int maxControllableHorizontalSpeed;
     public int airtimeHorizontalMovementForce;
@@ -165,11 +191,12 @@ public class Frog : MonoBehaviour
     public float manualRollTorque = 15;
     public float maxRollSpeed = 400;
     public float tonguePullStrength = 10f;
+
     private void FixedUpdate()
     {
         //Debug.Log(state.ToString());
         tongue.gameObject.SetActive(tongueActive);
-        
+
 
         if (state == State.TongueGrappling)
         {
@@ -178,11 +205,12 @@ public class Frog : MonoBehaviour
             float angle = Vector2.SignedAngle(left ? Vector2.left : Vector2.right, direction);
             transform.rotation = Quaternion.Euler(0, 0, angle);
         }
+
         if (tongueActive)
         {
             UpdateTongue();
         }
-        
+
         if (state is State.Idle or State.WallTethered or State.Landing or State.Hanging or State.WallTethering) //HHH
         {
             lastGrabbedVine = null;
@@ -213,6 +241,7 @@ public class Frog : MonoBehaviour
             {
                 rb.AddTorque(autoRollTorque);
             }
+
             //if ((!rightPressed && !leftPressed && Mathf.Abs(angle) <= 90))
             //{
             //    rb.angularVelocity *= 0.9f;
@@ -225,7 +254,7 @@ public class Frog : MonoBehaviour
                 rb.angularVelocity = 0;
             }
         }
-        
+
         if (state == State.Idle)
         {
             if (leftPressed && !left)
@@ -238,8 +267,9 @@ public class Frog : MonoBehaviour
                 left = false;
                 AdjustFlip();
             }
-            
+
         }
+
         if (state == State.Jumping)
         {
             airtime++;
@@ -248,7 +278,7 @@ public class Frog : MonoBehaviour
                 UnlockLegTargets();
                 state = State.Airborne;
             }
-            
+
             if (Input.GetKey(KeyCode.Space))
             {
                 rb.AddForce(jumpVector * Mathf.Pow(0.9f, airtime));
@@ -266,6 +296,7 @@ public class Frog : MonoBehaviour
             {
                 rb.AddForce(airtimeHorizontalMovementForce * Vector2.left);
             }
+
             if (rightPressed && rb.velocity.x < maxControllableHorizontalSpeed)
             {
                 rb.AddForce(airtimeHorizontalMovementForce * Vector2.right);
@@ -275,7 +306,7 @@ public class Frog : MonoBehaviour
         //HHH
         GetComponent<Collider2D>().enabled = state != State.WallTethering;
         rb.gravityScale = state is State.WallTethered or State.TongueGrappling ? 0 : gravityScale;
-        rb.freezeRotation = state is State.WallTethered;// or State.TongueGrappling;
+        rb.freezeRotation = state is State.WallTethered; // or State.TongueGrappling;
         bool freezePosition = state == State.WallTethered;
         if (freezePosition)
         {
@@ -285,6 +316,7 @@ public class Frog : MonoBehaviour
         {
             rb.constraints &= ~RigidbodyConstraints2D.FreezePosition;
         }
+
         if (state == State.WallTethering)
         {
             Vector2 armDifference = wallAttachPoint - (Vector2)armSpot.transform.position;
@@ -292,22 +324,21 @@ public class Frog : MonoBehaviour
             float targetAngle = left ? 270 : 90;
             float angleDifference = Mathf.Abs(transform.rotation.eulerAngles.z - targetAngle);
             //Debug.Log(moveMagnitude + " " + angleDifference);
-            
-            
+
+
             Vector2 move = armDifference.normalized * moveMagnitude;
             transform.position += (Vector3)move;
             float z = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, targetAngle, 6f);
             transform.rotation = Quaternion.Euler(0, 0, z);
-            
+
             //Debug.Log(angleDifference);
             //Debug.Log(Vector2.Distance(transform.position, (Vector3)wallAttachPoint));
             if (Vector3.Distance(armSpot.transform.position, (Vector3)wallAttachPoint) < 0.1f && angleDifference < 3f)
             {
-                Debug.Log("Wall tethered!");
                 state = State.WallTethered;
             }
         }
-        
+
         if (prevState == State.TongueGrappling && state != State.TongueGrappling)
         {
             EndTongue();
@@ -317,20 +348,22 @@ public class Frog : MonoBehaviour
     }
 
     private Vector2 wallAttachPoint;
+
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.layer == LayerMask.NameToLayer("spikes"))
         {
             Die();
         }
+
         if (Utility.IsFloor(col.gameObject))
         {
             state = State.Landing;
             airtime = 0;
         }
-        else if (Utility.IsWall(col.gameObject) && !col.gameObject.CompareTag("NonClingable") && state is State.Airborne or State.TongueGrappling)
+        else if (Utility.IsWall(col.gameObject) && !col.gameObject.CompareTag("NonClingable") &&
+                 state is State.Airborne or State.TongueGrappling)
         {
-            Debug.Log("MERP");
             //Time.timeScale = 0.2f;
             //indicator.transform.position = col.GetContact(0).point;
             wallAttachPoint = col.GetContact(0).point;
@@ -344,7 +377,7 @@ public class Frog : MonoBehaviour
     }
 
     private Rigidbody2D rb => GetComponent<Rigidbody2D>();
-    
+
     public float hangingJumpStrengthUp = 350;
     public float wallJumpStrengthUp = 250;
     public float wallJumpStrengthOut = 250;
@@ -352,6 +385,7 @@ public class Frog : MonoBehaviour
     public float vineSpin;
     private Vector2 jumpVector;
     private float gravityScale = 0;
+
     void Jump()
     {
         if (state == State.TongueGrappling)
@@ -368,7 +402,7 @@ public class Frog : MonoBehaviour
             jumpVector = new Vector2(0, hangingJumpStrengthUp);
             state = State.Jumping;
             rb.AddTorque(rb.velocity.x * vineSpin);
-            
+
         }
         else
         {
@@ -381,17 +415,18 @@ public class Frog : MonoBehaviour
             {
                 jumpVector = new Vector2(0, floorJumpStrength);
             }
+
             state = State.Jumping;
             LockLegTargets();
         }
-        
+
     }
 
     void LockLegTargets()
     {
         legTargets.transform.parent = transform.parent;
     }
-    
+
     void UnlockLegTargets()
     {
         legTargets.transform.parent = transform;
@@ -399,10 +434,12 @@ public class Frog : MonoBehaviour
 
     void MoveLegsTowardsStart(bool instant = false)
     {
-        legTargets.transform.localPosition = Vector3.Lerp(legTargets.transform.localPosition, targetStartLocalPos, instant ? 1 : 0.1f);
+        legTargets.transform.localPosition =
+            Vector3.Lerp(legTargets.transform.localPosition, targetStartLocalPos, instant ? 1 : 0.1f);
     }
-    
+
     private Vine lastGrabbedVine;
+
     public void GrabVine(GameObject vine)
     {
         Vine v = vine.GetComponent<Vine>();
@@ -410,6 +447,7 @@ public class Frog : MonoBehaviour
         {
             return;
         }
+
         v.grabJoint.connectedBody = rb;
         v.grabJoint.connectedAnchor = transform.InverseTransformPoint(armSpot.transform.position);
         state = State.Hanging;
@@ -417,8 +455,8 @@ public class Frog : MonoBehaviour
         Vector3 difference = armSpot.transform.position - v.grabSpot.transform.position;
         transform.position -= difference;
         lastGrabbedVine = v;
-    } 
-    
+    }
+
     private void UngrabVine()
     {
         state = State.Airborne;
@@ -438,6 +476,7 @@ public class Frog : MonoBehaviour
         {
             UngrabVine();
         }
+
         EndTongue();
         state = State.Idle;
         MoveLegsTowardsStart(true);
@@ -448,12 +487,18 @@ public class Frog : MonoBehaviour
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(1);
         Time.timeScale = defaultTimeScale;
-        Debug.Log("respawning");
         Respawn(respawnPoint);
     }
 
     private void Die()
     {
         StartCoroutine(DieRoutine());
+    }
+
+    private IEnumerator TemporarilyDisableCollision()
+    {
+        GetComponent<Collider2D>().enabled = false;
+        yield return new WaitForSecondsRealtime(0.25f);
+        GetComponent<Collider2D>().enabled = true;
     }
 }
