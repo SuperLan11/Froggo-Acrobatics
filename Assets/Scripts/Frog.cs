@@ -81,8 +81,30 @@ public class Frog : MonoBehaviour
             StartTongue(end);
         }
         
-        tonguePreview.start = mouthSpot.transform.position;
-        tonguePreview.end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        UpdateTonguePreview();
+    }
+
+    void UpdateTonguePreview()
+    {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Collider2D hit = Physics2D.OverlapPoint(mousePos, LayerMask.NameToLayer("fwc"));
+        tonguePreview.gameObject.SetActive(hit != null);
+        if (hit == null)
+        {
+            return;
+        }
+
+        Debug.Log("hear");
+
+        Vector2 start = mouthSpot.transform.position;
+        Vector2 end = mousePos;
+        Vector2 diff = end - start;
+        if (diff.magnitude > tongueMaxLength)
+        {
+            end = start + diff.normalized * tongueMaxLength;
+        }
+        tonguePreview.start = start;
+        tonguePreview.end = end;
         tonguePreview.Update();
     }
 
@@ -213,7 +235,7 @@ public class Frog : MonoBehaviour
             UpdateTongue();
         }
 
-        if (state is State.Idle or State.WallTethered or State.Landing or State.Hanging or State.WallTethering) //HHH
+        if (state is State.Idle or State.WallTethered or State.Landing or State.WallTethering) //HHH
         {
             lastGrabbedVine = null;
             airtime = 0;
@@ -441,12 +463,12 @@ public class Frog : MonoBehaviour
             Vector3.Lerp(legTargets.transform.localPosition, targetStartLocalPos, instant ? 1 : 0.1f);
     }
 
-    private Vine lastGrabbedVine;
+    private GameObject lastGrabbedVine;
 
     public void GrabVine(GameObject vine)
     {
         Vine v = vine.GetComponent<Vine>();
-        if (lastGrabbedVine == v)
+        if (lastGrabbedVine == vine)
         {
             return;
         }
@@ -457,13 +479,13 @@ public class Frog : MonoBehaviour
         v.grabJoint.enabled = true;
         Vector3 difference = armSpot.transform.position - v.grabSpot.transform.position;
         transform.position -= difference;
-        lastGrabbedVine = v;
+        lastGrabbedVine = vine;
     }
 
     private void UngrabVine()
     {
         state = State.Airborne;
-        if (lastGrabbedVine != null) lastGrabbedVine.grabJoint.enabled = false;
+        if (lastGrabbedVine != null) lastGrabbedVine.GetComponent<Vine>().grabJoint.enabled = false;
     }
 
     private Vector2 respawnPoint;
