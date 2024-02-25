@@ -406,7 +406,17 @@ public class Frog : MonoBehaviour
             Die();
         }
 
-        if (Utility.IsFloor(col.gameObject))
+        Vector2 normal = col.GetContact(0).normal;
+        bool ceilingNormal = normal == new Vector2(0, -1);
+        bool floorNormal = normal == new Vector2(0, 1);
+        bool rightmodeWallNormal = normal == new Vector2(-1, 0);
+        bool leftmodeWallNormal = normal == new Vector2(1, 0);
+
+        if (ceilingNormal)
+        {
+            
+        }
+        else if (Utility.IsFloor(col.gameObject) || (Utility.IsWall(col.gameObject) && floorNormal))
         {
             state = State.Landing;
             airtime = 0;
@@ -417,6 +427,15 @@ public class Frog : MonoBehaviour
             //indicator.transform.position = col.GetContact(0).point;
             wallAttachPoint = col.GetContact(0).point;
             wallAttachPoint.y = armSpot.transform.position.y;
+            if (leftmodeWallNormal)
+            {
+                left = true;
+            } else if (rightmodeWallNormal)
+            {
+                left = false;
+            }
+            AdjustFlip();
+            
             state = State.WallTethering;
             currentTetherAttach = col.gameObject;
             //indicator2.transform.position = col.GetContact(0).point + armLegDistance * Vector2.down;
