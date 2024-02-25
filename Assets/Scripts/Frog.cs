@@ -173,12 +173,10 @@ public class Frog : MonoBehaviour
 
     public void OnTongueCollide(GameObject other, Vector2 normal)
     {
-        if (state == State.TongueGrappling || prevState == State.TongueGrappling || state == State.WallTethering)
-        {
-            return;
-        }
+        bool badState = state == State.TongueGrappling || prevState == State.TongueGrappling ||
+                        state == State.WallTethering;
 
-        if ((Utility.IsWall(other) || normal == new Vector2(0, -1)) && !other.gameObject.CompareTag("NonClingable"))
+        if (!badState && (Utility.IsWall(other) || (normal == new Vector2(0, -1) && !ceilingHanging)) && !other.gameObject.CompareTag("NonClingable"))
         {
             if (state == State.WallTethered)
             {
@@ -271,6 +269,12 @@ public class Frog : MonoBehaviour
         if (state == State.Hanging)
         {
             airtime = 0;
+            /*if (!ceilingHanging)
+            {
+                float baseAngle = left ? -90 : 90;
+                transform.rotation =
+                    Quaternion.Euler(0, 0, lastGrabbedVine.transform.rotation.eulerAngles.z + baseAngle);
+            }*/
         }
 
         if (state == State.Landing)
@@ -428,6 +432,10 @@ public class Frog : MonoBehaviour
 
         if (ceilingNormal && state == State.TongueGrappling)
         {
+            if (ceilingHanging)
+            {
+                return;
+            }
             ceilingJoint.enabled = true;
             ceilingHanging = true;
             Vector2 anchorPos = ceilingJoint.anchor + (Vector2)transform.position;
@@ -542,6 +550,7 @@ public class Frog : MonoBehaviour
             return;
         }
         transform.rotation = Quaternion.Euler(0, 0, left ? -90 : 90);
+        ArmsHangPosition();
 
         v.grabJoint.connectedBody = rb;
         v.grabJoint.connectedAnchor = transform.InverseTransformPoint(armSpot.transform.position);
