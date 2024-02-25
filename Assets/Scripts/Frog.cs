@@ -13,7 +13,7 @@ public class Frog : MonoBehaviour
     public Tongue tonguePreview;
     public GameObject mouthSpot;
 
-    enum State
+    public enum State
     {
         Idle,
         Jumping,
@@ -36,7 +36,7 @@ public class Frog : MonoBehaviour
         instance = this;
     }
 
-    private State state = State.Idle;
+    public State state = State.Idle;
 
     void Start()
     {
@@ -525,5 +525,12 @@ public class Frog : MonoBehaviour
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), other, true);
         yield return new WaitForSeconds(0.5f);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), other, false);
+    }
+
+    public Checkpoint currentCheckpoint;
+    public void CollectCheckpoint(Checkpoint c)
+    {
+        currentCheckpoint = c;
+        respawnPoint = c.transform.position;
     }
 }
