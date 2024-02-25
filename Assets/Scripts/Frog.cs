@@ -177,11 +177,8 @@ public class Frog : MonoBehaviour
         bool badState = state == State.TongueGrappling || prevState == State.TongueGrappling ||
                         state == State.WallTethering;
 
-        if (other.gameObject.CompareTag("NonClingable"))
-        {
-            
-        }
-        else if (!badState && (Utility.IsWall(other) || (normal == new Vector2(0, -1) && !ceilingHanging)))
+        
+        if (!badState && (Utility.IsWall(other) || (normal == new Vector2(0, -1) && !ceilingHanging)) && !other.gameObject.CompareTag("NonClingable"))
         {
             if (state == State.WallTethered)
             {
@@ -200,6 +197,10 @@ public class Frog : MonoBehaviour
         }
         else
         {
+            if (other.gameObject.CompareTag("NonClingable"))
+            {
+                AudioManager.instance.PlayTongueHitMetal();
+            }
             tongueRetracting = true;
         }
     }
@@ -421,6 +422,7 @@ public class Frog : MonoBehaviour
     {
         if (col.gameObject.layer == LayerMask.NameToLayer("spikes"))
         {
+            AudioManager.instance.PlaySpikeDeath();
             Die();
         }
 
