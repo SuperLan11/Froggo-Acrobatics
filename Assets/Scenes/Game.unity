@@ -489,22 +489,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7463217423425718058, guid: 3811a9de57b482e4c8fbcdc016582e7e, type: 3}
-      propertyPath: m_Size.x
-      value: 2.39
-      objectReference: {fileID: 0}
-    - target: {fileID: 7463217423425718058, guid: 3811a9de57b482e4c8fbcdc016582e7e, type: 3}
-      propertyPath: m_Size.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7463217423425718058, guid: 3811a9de57b482e4c8fbcdc016582e7e, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: e05e6b80e9cfa5d4589a8ccb7d8ec3d0, type: 3}
-    - target: {fileID: 7463217423425718058, guid: 3811a9de57b482e4c8fbcdc016582e7e, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8990537451481852488, guid: 3811a9de57b482e4c8fbcdc016582e7e, type: 3}
       propertyPath: m_Name
       value: Checkpoint
@@ -1034,6 +1018,7 @@ MonoBehaviour:
   armSpot: {fileID: 433333030}
   legSpot: {fileID: 1536742077}
   defaultTimeScale: 1
+  state: 0
   tongueReachMultiplier: 0.5
   tongueTarget: {x: 0, y: 0}
   tongueProgressRate: 0.4
