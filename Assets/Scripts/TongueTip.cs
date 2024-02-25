@@ -14,9 +14,9 @@ public class TongueTip : MonoBehaviour
         var hit = Physics2D.CircleCast(transform.position, 0.4f, Vector2.zero, Mathf.Infinity, layerMask:mask);
         if (hit.collider != null)
         {
-            Debug.Log(hit.normal.x + " " + hit.normal.y);
+            //Debug.Log(hit.normal.x + " " + hit.normal.y);
             //Debug.Log("HIT " + hit.collider.gameObject.name);
-            Frog.instance.OnTongueCollide(hit.collider.gameObject);
+            Frog.instance.OnTongueCollide(hit.collider.gameObject, hit.normal);
         }
     }
 }

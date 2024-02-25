@@ -30,6 +30,7 @@ public class Frog : MonoBehaviour
     private float armLegDistance;
     public static Frog instance;
     public float defaultTimeScale;
+    public bool ceilingHanging;
 
     void Awake()
     {
@@ -45,6 +46,8 @@ public class Frog : MonoBehaviour
         respawnPoint = transform.position;
         Time.timeScale = defaultTimeScale;
         gravityScale = rb.gravityScale;
+        frontOldRotation = frontArm.transform.localRotation.eulerAngles.z;
+        backOldRotation = backArm.transform.localRotation.eulerAngles.z;
     }
 
     private bool leftPressed;
@@ -168,14 +171,14 @@ public class Frog : MonoBehaviour
         tongue.Update();
     }
 
-    public void OnTongueCollide(GameObject other)
+    public void OnTongueCollide(GameObject other, Vector2 normal)
     {
         if (state == State.TongueGrappling || prevState == State.TongueGrappling || state == State.WallTethering)
         {
             return;
         }
 
-        if (Utility.IsWall(other) && !other.gameObject.CompareTag("NonClingable"))
+        if ((Utility.IsWall(other) || normal == new Vector2(0, -1)) && !other.gameObject.CompareTag("NonClingable"))
         {
             if (state == State.WallTethered)
             {
@@ -212,6 +215,7 @@ public class Frog : MonoBehaviour
     public float maxControllableHorizontalSpeed;
     public float airtimeHorizontalMovementForce;
     public float vineSwingStrength;
+    public float ceilingHangSwingStrength;
 
     private bool left = false;
 
@@ -234,6 +238,10 @@ public class Frog : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (state != State.Hanging)
+        {
+            ceilingHanging = false;
+        }
         if (transform.position.y < DeathBarrier.instance.transform.position.y)
         {
             Die();
@@ -340,7 +348,7 @@ public class Frog : MonoBehaviour
 
         if (state is State.Airborne or State.Jumping or State.Hanging) //HHH
         {
-            float strength = state == State.Airborne ? airtimeHorizontalMovementForce : vineSwingStrength;
+            float strength = state == State.Airborne ? airtimeHorizontalMovementForce : ceilingHanging ? ceilingHangSwingStrength : vineSwingStrength;
             if (leftPressed && rb.velocity.x > -maxControllableHorizontalSpeed)
             {
                 rb.AddForce(strength * Vector2.left);
@@ -355,7 +363,7 @@ public class Frog : MonoBehaviour
         //HHH
         GetComponent<Collider2D>().enabled = state != State.WallTethering;
         rb.gravityScale = state is State.WallTethered or State.TongueGrappling ? 0 : gravityScale;
-        rb.freezeRotation = state is State.WallTethered or State.Hanging; // or State.TongueGrappling;
+        rb.freezeRotation = state is State.WallTethered or State.Hanging && !ceilingHanging; // or State.TongueGrappling;
         bool freezePosition = state == State.WallTethered;
         if (freezePosition)
         {
@@ -398,6 +406,7 @@ public class Frog : MonoBehaviour
 
     private Vector2 wallAttachPoint;
     private GameObject currentTetherAttach;
+    public HingeJoint2D ceilingJoint;
 
     private void OnCollisionEnter2D(Collision2D col)
     {
@@ -406,15 +415,29 @@ public class Frog : MonoBehaviour
             Die();
         }
 
+        if (state == State.Hanging)
+        {
+            return;
+        }
+
         Vector2 normal = col.GetContact(0).normal;
         bool ceilingNormal = normal == new Vector2(0, -1);
         bool floorNormal = normal == new Vector2(0, 1);
         bool rightmodeWallNormal = normal == new Vector2(-1, 0);
         bool leftmodeWallNormal = normal == new Vector2(1, 0);
 
-        if (ceilingNormal)
+        if (ceilingNormal && state == State.TongueGrappling)
         {
-            
+            ceilingJoint.enabled = true;
+            ceilingHanging = true;
+            Vector2 anchorPos = ceilingJoint.anchor + (Vector2)transform.position;
+            Vector2 collisionPos = col.GetContact(0).point;
+            Vector2 diff = collisionPos - anchorPos;
+            transform.position -= (Vector3)diff;
+            state = State.Hanging;
+            rb.angularVelocity = 0;
+            ArmsHangPosition();
+            EndTongue();
         }
         else if (Utility.IsFloor(col.gameObject) || (Utility.IsWall(col.gameObject) && floorNormal))
         {
@@ -448,10 +471,12 @@ public class Frog : MonoBehaviour
     private Rigidbody2D rb => GetComponent<Rigidbody2D>();
 
     public float hangingJumpStrengthUp = 350;
+    public float ceilingJumpStrengthUp = -10;
     public float wallJumpStrengthUp = 250;
     public float wallJumpStrengthOut = 250;
     public float floorJumpStrength = 250;
     public float vineSpin;
+    public float ceilingSpin;
     private Vector2 jumpVector;
     private float gravityScale = 0;
 
@@ -468,9 +493,9 @@ public class Frog : MonoBehaviour
         {
             UngrabVine();
             //rb.AddForce(new Vector2(0, hangingJumpStrengthUp));
-            jumpVector = new Vector2(0, hangingJumpStrengthUp);
+            jumpVector = new Vector2(0, ceilingHanging ? ceilingJumpStrengthUp : hangingJumpStrengthUp);
             state = State.Jumping;
-            rb.AddTorque(rb.velocity.x * vineSpin);
+            rb.AddTorque(rb.velocity.x * (ceilingHanging ? ceilingSpin : vineSpin));
 
         }
         else
@@ -531,6 +556,8 @@ public class Frog : MonoBehaviour
     {
         state = State.Airborne;
         if (lastGrabbedVine != null) lastGrabbedVine.GetComponent<Vine>().grabJoint.enabled = false;
+        ceilingJoint.enabled = false;
+        ArmsResetPosition();
     }
 
     private Vector2 respawnPoint;
@@ -597,5 +624,21 @@ public class Frog : MonoBehaviour
     public void EndOfLevel(int level)
     {
         StartCoroutine(EndOfLevelRoutine(level));
+    }
+
+    public GameObject frontArm;
+    public GameObject backArm;
+    private float frontOldRotation;
+    private float backOldRotation;
+    public void ArmsHangPosition()
+    {
+        frontArm.transform.localRotation = Quaternion.Euler(0, 0, -30);
+        backArm.transform.localRotation = Quaternion.Euler(0, 0, -30);
+    }
+
+    public void ArmsResetPosition()
+    {
+        frontArm.transform.localRotation = Quaternion.Euler(0, 0, frontOldRotation);
+        backArm.transform.localRotation = Quaternion.Euler(0, 0, backOldRotation);
     }
 }
