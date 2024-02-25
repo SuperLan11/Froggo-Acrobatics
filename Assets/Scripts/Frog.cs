@@ -198,8 +198,9 @@ public class Frog : MonoBehaviour
     public int jumpingTime;
 
     private Vector3 targetStartLocalPos;
-    public int maxControllableHorizontalSpeed;
-    public int airtimeHorizontalMovementForce;
+    public float maxControllableHorizontalSpeed;
+    public float airtimeHorizontalMovementForce;
+    public float vineSwingStrength;
 
     private bool left = false;
 
@@ -319,21 +320,22 @@ public class Frog : MonoBehaviour
 
         if (state is State.Airborne or State.Jumping or State.Hanging) //HHH
         {
+            float strength = state == State.Airborne ? airtimeHorizontalMovementForce : vineSwingStrength;
             if (leftPressed && rb.velocity.x > -maxControllableHorizontalSpeed)
             {
-                rb.AddForce(airtimeHorizontalMovementForce * Vector2.left);
+                rb.AddForce(strength * Vector2.left);
             }
 
             if (rightPressed && rb.velocity.x < maxControllableHorizontalSpeed)
             {
-                rb.AddForce(airtimeHorizontalMovementForce * Vector2.right);
+                rb.AddForce(strength * Vector2.right);
             }
         }
 
         //HHH
         GetComponent<Collider2D>().enabled = state != State.WallTethering;
         rb.gravityScale = state is State.WallTethered or State.TongueGrappling ? 0 : gravityScale;
-        rb.freezeRotation = state is State.WallTethered; // or State.TongueGrappling;
+        rb.freezeRotation = state is State.WallTethered or State.Hanging; // or State.TongueGrappling;
         bool freezePosition = state == State.WallTethered;
         if (freezePosition)
         {
@@ -475,6 +477,7 @@ public class Frog : MonoBehaviour
         {
             return;
         }
+        transform.rotation = Quaternion.Euler(0, 0, left ? -90 : 90);
 
         v.grabJoint.connectedBody = rb;
         v.grabJoint.connectedAnchor = transform.InverseTransformPoint(armSpot.transform.position);
