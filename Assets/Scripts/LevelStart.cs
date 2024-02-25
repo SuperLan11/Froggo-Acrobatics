@@ -7,7 +7,7 @@ public class LevelStart : Checkpoint
     public static Dictionary<int, LevelStart> levelStarts = new();
     public int level;
 
-    void Start()
+    void Awake()
     {
         levelStarts[level] = this;
         GetComponent<SpriteRenderer>().enabled = false;

@@ -7,7 +7,7 @@ public class LevelEnd : MonoBehaviour
     public static Dictionary<int, LevelEnd> levelEnds = new();
     public int level;
 
-    void Start()
+    void Awake()
     {
         levelEnds[level] = this;
     }

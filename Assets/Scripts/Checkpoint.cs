@@ -7,11 +7,13 @@ public class Checkpoint : MonoBehaviour
     public Sprite inactiveSprite;
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
+        bool active = !(Frog.instance.currentCheckpoint == null) && Frog.instance.currentCheckpoint.gameObject == gameObject;
         if (other.gameObject.GetComponentInParent<Frog>() != null)
         {
             other.gameObject.GetComponentInParent<Frog>().CollectCheckpoint(this);
+            if (!active) AudioManager.instance.PlayCollectCheckpoint();
         }
-        AudioManager.instance.PlayCollectCheckpoint();
+        
     }
 
     void Update()
