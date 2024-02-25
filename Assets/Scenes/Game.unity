@@ -730,6 +730,7 @@ MonoBehaviour:
   armSpot: {fileID: 433333030}
   legSpot: {fileID: 1536742077}
   defaultTimeScale: 1
+  tongueReachMultiplier: 0.5
   tongueTarget: {x: 0, y: 0}
   tongueProgressRate: 0.4
   tongueMaxLength: 30

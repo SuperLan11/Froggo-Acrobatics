@@ -44,6 +44,7 @@ public class Frog : MonoBehaviour
         yield return new WaitForFixedUpdate();
         AdjustFlip();
     }
+    public float tongueReachMultiplier = 2f;
 
     void Update()
     {
@@ -63,7 +64,11 @@ public class Frog : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             tongueActive = true;
-            StartTongue(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            Vector2 end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 start = mouthSpot.transform.position;
+            Vector2 diff = end - start;
+            end = start + diff*tongueReachMultiplier;
+            StartTongue(end);
         }
     }
 
