@@ -11,7 +11,7 @@ public class CameraZone : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D col)
     {
-        var camera = col.gameObject.GetComponent<GameCamera>();
-        camera.ResetOffset();
+        //var camera = col.gameObject.GetComponent<GameCamera>();
+        //camera.ResetOffset();
     }
 }

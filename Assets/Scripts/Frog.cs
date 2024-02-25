@@ -177,7 +177,11 @@ public class Frog : MonoBehaviour
         bool badState = state == State.TongueGrappling || prevState == State.TongueGrappling ||
                         state == State.WallTethering;
 
-        if (!badState && (Utility.IsWall(other) || (normal == new Vector2(0, -1) && !ceilingHanging)) && !other.gameObject.CompareTag("NonClingable"))
+        if (other.gameObject.CompareTag("NonClingable"))
+        {
+            
+        }
+        else if (!badState && (Utility.IsWall(other) || (normal == new Vector2(0, -1) && !ceilingHanging)))
         {
             if (state == State.WallTethered)
             {

@@ -6,6 +6,8 @@ public class AudioManager : MonoBehaviour
     public AudioSource clearStageSource;
     public AudioSource jumpSource;
     public AudioSource tongueShoot;
+    public AudioSource spikeDeathSource;
+    public AudioSource tongueMetalSource;
     void Awake()
     {
         instance = this;
@@ -24,5 +26,15 @@ public class AudioManager : MonoBehaviour
     public void PlayTongueShoot()
     {
         tongueShoot.Play();
+    }
+
+    public void PlayTongueHitMetal()
+    {
+        tongueMetalSource.Play();
+    }
+    
+    public void PlaySpikeDeath()
+    {
+        spikeDeathSource.Play();
     }
 }
