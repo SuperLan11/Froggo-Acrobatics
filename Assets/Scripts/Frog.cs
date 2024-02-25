@@ -80,8 +80,11 @@ public class Frog : MonoBehaviour
             end = start + diff * tongueReachMultiplier;
             StartTongue(end);
         }
-        
-        UpdateTonguePreview();
+
+        if (tonguePreview != null)
+        {
+            UpdateTonguePreview();
+        }
     }
 
     void UpdateTonguePreview()
@@ -532,5 +535,19 @@ public class Frog : MonoBehaviour
     {
         currentCheckpoint = c;
         respawnPoint = c.transform.position;
+    }
+
+    private IEnumerator EndOfLevelRoutine(int level)
+    {
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(1);
+        Time.timeScale = defaultTimeScale;
+        respawnPoint = LevelStart.levelStarts[level + 1].transform.position;
+        Respawn(respawnPoint);
+    }
+
+    public void EndOfLevel(int level)
+    {
+        StartCoroutine(EndOfLevelRoutine(level));
     }
 }
