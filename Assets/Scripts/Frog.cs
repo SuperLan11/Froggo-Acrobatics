@@ -449,7 +449,7 @@ public class Frog : MonoBehaviour
             Vector2 anchorPos = ceilingJoint.anchor + (Vector2)transform.position;
             Vector2 collisionPos = col.GetContact(0).point;
             Vector2 diff = collisionPos - anchorPos;
-            transform.position -= (Vector3)diff;
+            transform.position -= (Vector3)diff*0.6f;
             state = State.Hanging;
             rb.angularVelocity = 0;
             ArmsHangPosition();
