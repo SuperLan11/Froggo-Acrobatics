@@ -372,7 +372,7 @@ public class Frog : MonoBehaviour
         //HHH
         GetComponent<Collider2D>().enabled = state != State.WallTethering;
         rb.gravityScale = state is State.WallTethered or State.TongueGrappling ? 0 : gravityScale;
-        rb.freezeRotation = state is State.WallTethered or State.Hanging && !ceilingHanging; // or State.TongueGrappling;
+        rb.freezeRotation = state is State.WallTethered;// or State.Hanging;// && !ceilingHanging; // or State.TongueGrappling;
         bool freezePosition = state == State.WallTethered;
         if (freezePosition)
         {
