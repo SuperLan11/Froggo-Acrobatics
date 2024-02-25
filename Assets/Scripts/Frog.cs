@@ -138,6 +138,7 @@ public class Frog : MonoBehaviour
 
     public float tongueProgressRate = 0.4f;
     public float tongueMaxLength = 6f;
+    public float ceilingHangHorizontalJumpStrength = 0.2f;
 
     private void UpdateTongue()
     {
@@ -583,6 +584,10 @@ public class Frog : MonoBehaviour
     {
         state = State.Airborne;
         if (lastGrabbedVine != null) lastGrabbedVine.GetComponent<Vine>().grabJoint.enabled = false;
+        if (ceilingHanging)
+        {
+            rb.AddForce(Vector2.right * rb.angularVelocity * ceilingHangHorizontalJumpStrength);
+        }
         ceilingJoint.enabled = false;
         ArmsResetPosition();
     }
