@@ -245,6 +245,11 @@ public class Frog : MonoBehaviour
             airtime = 0;
         }
 
+        if (state == State.Hanging)
+        {
+            airtime = 0;
+        }
+
         if (state == State.Landing)
         {
             float angle = transform.rotation.eulerAngles.z;
@@ -540,13 +545,18 @@ public class Frog : MonoBehaviour
         respawnPoint = c.transform.position;
     }
 
+    public void TeleportToLevel(int level)
+    {
+        respawnPoint = LevelStart.levelStarts[level].transform.position;
+        Respawn(respawnPoint);
+    }
+
     private IEnumerator EndOfLevelRoutine(int level)
     {
         Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(1);
         Time.timeScale = defaultTimeScale;
-        respawnPoint = LevelStart.levelStarts[level + 1].transform.position;
-        Respawn(respawnPoint);
+        TeleportToLevel(level + 1);
     }
 
     public void EndOfLevel(int level)
