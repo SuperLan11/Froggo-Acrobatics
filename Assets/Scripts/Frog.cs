@@ -589,7 +589,7 @@ public class Frog : MonoBehaviour
         if (lastGrabbedVine != null) lastGrabbedVine.GetComponent<Vine>().grabJoint.enabled = false;
         if (ceilingHanging)
         {
-            rb.AddForce(Vector2.right * rb.angularVelocity * ceilingHangHorizontalJumpStrength);
+            rb.AddForce(Vector2.right * Mathf.Sign(rb.angularVelocity) * Mathf.Sqrt(Mathf.Abs(rb.angularVelocity)) * ceilingHangHorizontalJumpStrength);
         }
         ceilingJoint.enabled = false;
         ArmsResetPosition();
