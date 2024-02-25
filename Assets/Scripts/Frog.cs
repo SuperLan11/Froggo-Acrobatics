@@ -8,6 +8,7 @@ using Vector3 = UnityEngine.Vector3;
 
 public class Frog : MonoBehaviour
 {
+    public static int selectedLevel = 1;
     public GameObject legTargets;
     public Tongue tongue;
     public Tongue tonguePreview;
@@ -48,6 +49,8 @@ public class Frog : MonoBehaviour
         gravityScale = rb.gravityScale;
         frontOldRotation = frontArm.transform.localRotation.eulerAngles.z;
         backOldRotation = backArm.transform.localRotation.eulerAngles.z;
+        
+        if (selectedLevel != 0) TeleportToLevel(selectedLevel);
     }
 
     private bool leftPressed;
