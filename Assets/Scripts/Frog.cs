@@ -78,6 +78,8 @@ public class Frog : MonoBehaviour
             Vector2 start = mouthSpot.transform.position;
             Vector2 diff = end - start;
             end = start + diff * tongueReachMultiplier;
+            float m = Mathf.Min((end - start).magnitude, tongueMaxLength);
+            end = start + diff.normalized * m;
             StartTongue(end);
         }
 

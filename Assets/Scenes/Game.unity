@@ -1076,10 +1076,10 @@ MonoBehaviour:
   legSpot: {fileID: 1536742077}
   defaultTimeScale: 1
   state: 0
-  tongueReachMultiplier: 0.5
+  tongueReachMultiplier: 2
   tongueTarget: {x: 0, y: 0}
   tongueProgressRate: 0.4
-  tongueMaxLength: 30
+  tongueMaxLength: 14
   jumpingTime: 10
   maxControllableHorizontalSpeed: 3
   airtimeHorizontalMovementForce: 15
