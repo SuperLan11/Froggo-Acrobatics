@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Quaternion = UnityEngine.Quaternion;
@@ -146,7 +147,8 @@ public class Frog : MonoBehaviour
         {
             if (state == State.WallTethered)
             {
-                StartCoroutine(TemporarilyDisableCollision());
+                //Time.timeScale = 0.15f;
+                if (currentTetherAttach != null) StartCoroutine(TemporarilyDisableCollision(currentTetherAttach.GetComponent<Collider2D>()));
             }
             state = State.TongueGrappling;
             left = other.transform.position.x < transform.position.x;
@@ -348,6 +350,7 @@ public class Frog : MonoBehaviour
     }
 
     private Vector2 wallAttachPoint;
+    private GameObject currentTetherAttach;
 
     private void OnCollisionEnter2D(Collision2D col)
     {
@@ -364,11 +367,11 @@ public class Frog : MonoBehaviour
         else if (Utility.IsWall(col.gameObject) && !col.gameObject.CompareTag("NonClingable") &&
                  state is State.Airborne or State.TongueGrappling)
         {
-            //Time.timeScale = 0.2f;
             //indicator.transform.position = col.GetContact(0).point;
             wallAttachPoint = col.GetContact(0).point;
             wallAttachPoint.y = armSpot.transform.position.y;
             state = State.WallTethering;
+            currentTetherAttach = col.gameObject;
             //indicator2.transform.position = col.GetContact(0).point + armLegDistance * Vector2.down;
             //transform.rotation = Quaternion.Euler(0, 0, 90);
             rb.velocity = Vector2.zero;
@@ -495,10 +498,10 @@ public class Frog : MonoBehaviour
         StartCoroutine(DieRoutine());
     }
 
-    private IEnumerator TemporarilyDisableCollision()
+    private IEnumerator TemporarilyDisableCollision(Collider2D other)
     {
-        GetComponent<Collider2D>().enabled = false;
-        yield return new WaitForSecondsRealtime(0.25f);
-        GetComponent<Collider2D>().enabled = true;
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), other, true);
+        yield return new WaitForSeconds(0.5f);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), other, false);
     }
 }
