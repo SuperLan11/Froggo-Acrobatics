@@ -163,8 +163,7 @@ public class Frog : MonoBehaviour
 
     public void OnTongueCollide(GameObject other)
     {
-        if (state == State.TongueGrappling || prevState == State.TongueGrappling || state == State.WallTethering ||
-            state == State.Hanging)
+        if (state == State.TongueGrappling || prevState == State.TongueGrappling || state == State.WallTethering)
         {
             return;
         }
@@ -175,6 +174,11 @@ public class Frog : MonoBehaviour
             {
                 //Time.timeScale = 0.15f;
                 if (currentTetherAttach != null) StartCoroutine(TemporarilyDisableCollision(currentTetherAttach.GetComponent<Collider2D>()));
+            }
+
+            if (state == State.Hanging)
+            {
+                UngrabVine();
             }
             state = State.TongueGrappling;
             left = other.transform.position.x < transform.position.x;

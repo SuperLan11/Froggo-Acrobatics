@@ -1083,7 +1083,7 @@ MonoBehaviour:
   jumpingTime: 10
   maxControllableHorizontalSpeed: 3
   airtimeHorizontalMovementForce: 15
-  vineSwingStrength: 0
+  vineSwingStrength: 13
   autoRollThreshold: 90
   autoRollTorque: 30
   manualRollTorque: 15
@@ -1399,11 +1399,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2482917540199344693, guid: 571b5fc5e2d123e45b2ae2a09aa91d5a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.05
+      value: -4.1
       objectReference: {fileID: 0}
     - target: {fileID: 2482917540199344693, guid: 571b5fc5e2d123e45b2ae2a09aa91d5a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.05
+      value: 14.5
       objectReference: {fileID: 0}
     - target: {fileID: 2482917540199344693, guid: 571b5fc5e2d123e45b2ae2a09aa91d5a, type: 3}
       propertyPath: m_LocalPosition.z
