@@ -14,6 +14,12 @@ public class Vine : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        bool frogPresent = Frog.instance.state == Frog.State.Hanging && Frog.instance.lastGrabbedVine == gameObject;
+        if (!frogPresent) GetComponent<Rigidbody2D>().angularVelocity *= 0.8f;
+    }
+
     private void Start()
     {
         grabJoint.anchor = new Vector2(0, -GetComponent<SpriteRenderer>().size.y / 2);

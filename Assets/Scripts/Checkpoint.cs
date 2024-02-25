@@ -5,7 +5,7 @@ public class Checkpoint : MonoBehaviour
 {
     public Sprite activeSprite;
     public Sprite inactiveSprite;
-    private void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.GetComponentInParent<Frog>() != null)
         {
