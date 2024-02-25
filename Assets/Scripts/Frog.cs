@@ -76,6 +76,7 @@ public class Frog : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && state != State.TongueGrappling)
         {
+            AudioManager.instance.PlayTongueShoot();
             tongueActive = true;
             Vector2 end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 start = mouthSpot.transform.position;
@@ -446,6 +447,9 @@ public class Frog : MonoBehaviour
             rb.angularVelocity = 0;
             ArmsHangPosition();
             EndTongue();
+        } else if (ceilingNormal)
+        {
+            //do nothing
         }
         else if (Utility.IsFloor(col.gameObject) || (Utility.IsWall(col.gameObject) && floorNormal))
         {
@@ -488,6 +492,13 @@ public class Frog : MonoBehaviour
     private Vector2 jumpVector;
     private float gravityScale = 0;
 
+    public float initialJumpForceMultiplier = 1.5f;
+    void SetupJump(Vector2 jumpVector)
+    {
+        this.jumpVector = jumpVector;
+        rb.AddForce(jumpVector * initialJumpForceMultiplier);
+    }
+
     void Jump()
     {
         if (state == State.TongueGrappling)
@@ -496,12 +507,13 @@ public class Frog : MonoBehaviour
             state = State.Airborne;
             return;
         }
-
+        
+        AudioManager.instance.PlayJump();
         if (state == State.Hanging)
         {
             UngrabVine();
             //rb.AddForce(new Vector2(0, hangingJumpStrengthUp));
-            jumpVector = new Vector2(0, ceilingHanging ? ceilingJumpStrengthUp : hangingJumpStrengthUp);
+            SetupJump(new Vector2(0, ceilingHanging ? ceilingJumpStrengthUp : hangingJumpStrengthUp));
             state = State.Jumping;
             rb.AddTorque(rb.velocity.x * (ceilingHanging ? ceilingSpin : vineSpin));
 
@@ -511,11 +523,11 @@ public class Frog : MonoBehaviour
             //rb.AddForce(new Vector2(0, wallJumpStrengthUp) + (Vector2)transform.up * 250);
             if (state is State.WallTethered or State.WallTethering)
             {
-                jumpVector = new Vector2(0, wallJumpStrengthUp) + (Vector2)transform.up * wallJumpStrengthOut;
+                SetupJump(new Vector2(0, wallJumpStrengthUp) + (Vector2)transform.up * wallJumpStrengthOut);
             }
             else
             {
-                jumpVector = new Vector2(0, floorJumpStrength);
+                SetupJump(jumpVector = new Vector2(0, floorJumpStrength));
             }
 
             state = State.Jumping;
@@ -625,6 +637,7 @@ public class Frog : MonoBehaviour
     private IEnumerator EndOfLevelRoutine(int level)
     {
         Time.timeScale = 0f;
+        AudioManager.instance.PlayClearStage();
         yield return new WaitForSecondsRealtime(1);
         Time.timeScale = defaultTimeScale;
         TeleportToLevel(level + 1);
