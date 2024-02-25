@@ -4,6 +4,6 @@ public class ForceNoLocalRotation : MonoBehaviour
 {
     void Update()
     {
-        transform.localRotation = Quaternion.identity;
+        transform.localRotation = Quaternion.Euler(0, 0, 180);
     }
 }

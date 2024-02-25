@@ -10,6 +10,7 @@ public class Frog : MonoBehaviour
 {
     public GameObject legTargets;
     public Tongue tongue;
+    public Tongue tonguePreview;
     public GameObject mouthSpot;
 
     enum State
@@ -67,10 +68,6 @@ public class Frog : MonoBehaviour
                 Jump();
             }
         }
-
-        //tongue.start = mouthSpot.transform.position;
-        //tongue.end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
         leftPressed = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
         rightPressed = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
 
@@ -83,6 +80,10 @@ public class Frog : MonoBehaviour
             end = start + diff * tongueReachMultiplier;
             StartTongue(end);
         }
+        
+        tonguePreview.start = mouthSpot.transform.position;
+        tonguePreview.end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        tonguePreview.Update();
     }
 
     private bool tongueActive = false;
@@ -198,8 +199,7 @@ public class Frog : MonoBehaviour
     {
         //Debug.Log(state.ToString());
         tongue.gameObject.SetActive(tongueActive);
-
-
+        
         if (state == State.TongueGrappling)
         {
             rb.velocity = (tongue.end - (Vector2)transform.position).normalized * tonguePullStrength;
