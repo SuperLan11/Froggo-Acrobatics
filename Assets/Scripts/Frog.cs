@@ -194,6 +194,7 @@ public class Frog : MonoBehaviour
             {
                 UngrabVine();
             }
+            AudioManager.instance.PlayTongueHit();
             state = State.TongueGrappling;
             left = other.transform.position.x < transform.position.x;
             StartCoroutine(AdjustFlipLater());
@@ -203,7 +204,7 @@ public class Frog : MonoBehaviour
         {
             if (other.gameObject.CompareTag("NonClingable"))
             {
-                AudioManager.instance.PlayTongueHitMetal();
+                AudioManager.instance.PlayTongueHit();
             }
             tongueRetracting = true;
         }
@@ -426,7 +427,6 @@ public class Frog : MonoBehaviour
     {
         if (col.gameObject.layer == LayerMask.NameToLayer("spikes"))
         {
-            AudioManager.instance.PlaySpikeDeath();
             Die();
         }
 
@@ -624,6 +624,7 @@ public class Frog : MonoBehaviour
 
     private void Die()
     {
+        AudioManager.instance.PlayDeath();
         StartCoroutine(DieRoutine());
     }
 
@@ -636,6 +637,7 @@ public class Frog : MonoBehaviour
 
     public Checkpoint currentCheckpoint;
     public int currentLevel;
+    
     public void CollectCheckpoint(Checkpoint c)
     {
         currentCheckpoint = c;

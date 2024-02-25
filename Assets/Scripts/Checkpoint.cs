@@ -11,6 +11,7 @@ public class Checkpoint : MonoBehaviour
         {
             other.gameObject.GetComponentInParent<Frog>().CollectCheckpoint(this);
         }
+        AudioManager.instance.PlayCollectCheckpoint();
     }
 
     void Update()

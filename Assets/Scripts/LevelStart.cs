@@ -20,10 +20,10 @@ public class LevelStart : Checkpoint
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
-        base.OnTriggerEnter2D(other);
         var frog = other.gameObject.GetComponentInParent<Frog>();
         if (frog != null)
         {
+            frog.CollectCheckpoint(this);
             frog.currentLevel = level;
         }
     }
