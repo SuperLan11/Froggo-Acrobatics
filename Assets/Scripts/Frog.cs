@@ -87,6 +87,11 @@ public class Frog : MonoBehaviour
         {
             UpdateTonguePreview();
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            TeleportToLevel(currentLevel);
+        }
     }
 
     void UpdateTonguePreview()
@@ -229,6 +234,10 @@ public class Frog : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (transform.position.y < DeathBarrier.instance.transform.position.y)
+        {
+            Die();
+        }
         //Debug.Log(state.ToString());
         tongue.gameObject.SetActive(tongueActive);
         
@@ -479,7 +488,7 @@ public class Frog : MonoBehaviour
             Vector3.Lerp(legTargets.transform.localPosition, targetStartLocalPos, instant ? 1 : 0.1f);
     }
 
-    private GameObject lastGrabbedVine;
+    public GameObject lastGrabbedVine;
 
     public void GrabVine(GameObject vine)
     {
@@ -545,6 +554,7 @@ public class Frog : MonoBehaviour
     }
 
     public Checkpoint currentCheckpoint;
+    public int currentLevel;
     public void CollectCheckpoint(Checkpoint c)
     {
         currentCheckpoint = c;
