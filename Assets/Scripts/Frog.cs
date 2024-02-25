@@ -71,7 +71,7 @@ public class Frog : MonoBehaviour
         leftPressed = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
         rightPressed = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && state != State.TongueGrappling)
         {
             tongueActive = true;
             Vector2 end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
