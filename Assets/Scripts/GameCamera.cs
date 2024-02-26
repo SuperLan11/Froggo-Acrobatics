@@ -6,9 +6,9 @@ public class GameCamera : MonoBehaviour
     public GameObject follow;
     public Vector2 offset;
     public Vector2 currentOffset;
-    void Update()
+    void FixedUpdate()
     { 
-        currentOffset = Vector2.Lerp(currentOffset, offset, Time.deltaTime);
+        currentOffset = Vector2.Lerp(currentOffset, offset, Time.fixedDeltaTime);
         transform.position = (Vector2)follow.transform.position + currentOffset;
         GetComponent<Collider2D>().offset = -currentOffset;
         transform.position += Vector3.back * 10;

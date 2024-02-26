@@ -204,6 +204,10 @@ public class Frog : MonoBehaviour
         {
             if (other.gameObject.CompareTag("NonClingable"))
             {
+                if (other.gameObject.GetComponent<Lever>() != null)
+                {
+                    other.gameObject.GetComponent<Lever>().Hit();
+                }
                 AudioManager.instance.PlayTongueHit();
             }
             tongueRetracting = true;

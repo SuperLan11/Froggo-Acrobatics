@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2605268597271433116, guid: 0819a228b5b17d24ebd5e3b7fd76d21f, type: 3}
       propertyPath: m_Name
-      value: Level Select button
+      value: Level Select button Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4152899221780583530, guid: 0819a228b5b17d24ebd5e3b7fd76d21f, type: 3}
       propertyPath: m_Pivot.x
@@ -38,14 +38,6 @@ PrefabInstance:
     - target: {fileID: 4152899221780583530, guid: 0819a228b5b17d24ebd5e3b7fd76d21f, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4152899221780583530, guid: 0819a228b5b17d24ebd5e3b7fd76d21f, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 160
-      objectReference: {fileID: 0}
-    - target: {fileID: 4152899221780583530, guid: 0819a228b5b17d24ebd5e3b7fd76d21f, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4152899221780583530, guid: 0819a228b5b17d24ebd5e3b7fd76d21f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -118,6 +110,10 @@ PrefabInstance:
     - target: {fileID: 6882576530509173588, guid: 0819a228b5b17d24ebd5e3b7fd76d21f, type: 3}
       propertyPath: m_text
       value: Level 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882576530509173588, guid: 0819a228b5b17d24ebd5e3b7fd76d21f, type: 3}
+      propertyPath: m_fontSize
+      value: 34.05
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1836441682750010395, guid: 0819a228b5b17d24ebd5e3b7fd76d21f, type: 3}
