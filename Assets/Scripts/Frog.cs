@@ -616,6 +616,10 @@ public class Frog : MonoBehaviour
         EndTongue();
         state = State.Idle;
         MoveLegsTowardsStart(true);
+        foreach (Lever lever in FindObjectsOfType<Lever>())
+        {
+            lever.ResetPos();
+        }
     }
 
     IEnumerator DieRoutine()
