@@ -19138,6 +19138,10 @@ PrefabInstance:
       value: vine
       objectReference: {fileID: 0}
     - target: {fileID: 8819263507170816056, guid: e00f7144700e68547a655af3bb98f797, type: 3}
+      propertyPath: m_Anchor.y
+      value: -1.5999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 8819263507170816056, guid: e00f7144700e68547a655af3bb98f797, type: 3}
       propertyPath: m_ConnectedAnchor.x
       value: 164.55
       objectReference: {fileID: 0}
