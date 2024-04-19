@@ -9,9 +9,14 @@ public class GameCamera : MonoBehaviour
     void FixedUpdate()
     { 
         currentOffset = Vector2.Lerp(currentOffset, offset, Time.fixedDeltaTime);
-        transform.position = (Vector2)follow.transform.position + currentOffset;
+        transform.position = Vector2.Lerp(transform.position, (Vector2)follow.transform.position + currentOffset, 0.2f);
         GetComponent<Collider2D>().offset = -currentOffset;
         transform.position += Vector3.back * 10;
+    }
+    
+    public void Teleport(Vector2 position)
+    {
+        transform.position = (Vector3)position + Vector3.back * 10;
     }
 
     public void SetOffset(Vector2 offset)
