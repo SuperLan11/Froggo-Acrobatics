@@ -421,6 +421,8 @@ public class Frog : MonoBehaviour
         }
 
         prevState = state;
+        
+        FindObjectOfType<ParallaxBackground>().FroggoFixedUpdate();
     }
 
     private Vector2 wallAttachPoint;
@@ -582,6 +584,7 @@ public class Frog : MonoBehaviour
         v.grabJoint.connectedAnchor = transform.InverseTransformPoint(armSpot.transform.position);
         state = State.Hanging;
         v.grabJoint.enabled = true;
+        v.SetTipOffset(transform.rotation.eulerAngles.z);
         Vector3 difference = armSpot.transform.position - v.grabSpot.transform.position;
         transform.position -= difference;
         lastGrabbedVine = vine;
@@ -600,6 +603,11 @@ public class Frog : MonoBehaviour
     }
 
     private Vector2 respawnPoint;
+
+    private void TeleportCamera(Vector2 pos)
+    {
+        FindObjectOfType<GameCamera>().Teleport(pos);
+    }
 
     private void Respawn(Vector2 pos)
     {
@@ -656,6 +664,7 @@ public class Frog : MonoBehaviour
     {
         respawnPoint = LevelStart.levelStarts[level].transform.position;
         Respawn(respawnPoint);
+        TeleportCamera(respawnPoint);
     }
 
     private IEnumerator EndOfLevelRoutine(int level)
