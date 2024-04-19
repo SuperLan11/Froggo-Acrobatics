@@ -197,6 +197,7 @@ public class Frog : MonoBehaviour
             AudioManager.instance.PlayTongueHit();
             state = State.TongueGrappling;
             left = other.transform.position.x < transform.position.x;
+            currentTetherAttach = other.gameObject;
             StartCoroutine(AdjustFlipLater());
             UpdateTongue();
         }
@@ -262,6 +263,11 @@ public class Frog : MonoBehaviour
         //Debug.Log(state.ToString());
         tongue.gameObject.SetActive(tongueActive);
         
+        if (tongueActive)
+        {
+            UpdateTongue();
+        }
+        
         if (state == State.TongueGrappling)
         {
             rb.velocity = (tongue.end - (Vector2)transform.position).normalized * tonguePullStrength;
@@ -270,10 +276,7 @@ public class Frog : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, angle);
         }
 
-        if (tongueActive)
-        {
-            UpdateTongue();
-        }
+        
 
         if (state is State.Idle or State.WallTethered or State.Landing or State.WallTethering) //HHH
         {
@@ -422,7 +425,29 @@ public class Frog : MonoBehaviour
 
         prevState = state;
         
+        Debug.Log(currentTetherAttach);
         FindObjectOfType<ParallaxBackground>().FroggoFixedUpdate();
+        MovingPlatform myPlatform = currentTetherAttach == null ? null : currentTetherAttach.GetComponent<MovingPlatform>();
+        foreach (MovingPlatform platform in FindObjectsOfType<MovingPlatform>())
+        {
+            Vector3 diff = platform.FroggoFixedUpdate();
+            if (platform.Equals(myPlatform))
+            {
+                //HHH
+                if (state == State.TongueGrappling)
+                {
+                    tongue.end += (Vector2) diff;
+                }
+                else if (state is State.WallTethered or State.WallTethering)
+                {
+                    wallAttachPoint += (Vector2) diff;
+                    transform.position += diff;
+                } else if (state == State.Hanging && ceilingHanging)
+                {
+                    transform.position += diff;
+                }
+            }
+        }
     }
 
     private Vector2 wallAttachPoint;
@@ -517,6 +542,7 @@ public class Frog : MonoBehaviour
 
     void Jump()
     {
+        currentTetherAttach = null;
         if (state == State.TongueGrappling)
         {
             EndTongue();
@@ -599,6 +625,7 @@ public class Frog : MonoBehaviour
             rb.AddForce(Vector2.right * Mathf.Sign(rb.angularVelocity) * Mathf.Sqrt(Mathf.Abs(rb.angularVelocity)) * ceilingHangHorizontalJumpStrength);
         }
         ceilingJoint.enabled = false;
+        currentTetherAttach = null;
         ArmsResetPosition();
     }
 
