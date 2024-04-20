@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   command: {fileID: 584065286670629018}
+  trackPrefab: {fileID: 7943009950596472318, guid: 2b56076837e9b884d8d0b388e9174b77, type: 3}
 --- !u!1 &8711996465765322848
 GameObject:
   m_ObjectHideFlags: 0

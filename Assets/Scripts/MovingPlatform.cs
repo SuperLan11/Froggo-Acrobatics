@@ -31,6 +31,18 @@ public class MovingPlatform : MonoBehaviour
             }
         }
         instructions[0].start();
+
+        for (int i = 0; i < instructions.Length; i++)
+        {
+            Vector2 current = targets[i].transform.position;
+            Vector2 next = targets[(i + 1) % instructions.Length].transform.position;
+            if (current == next)
+            {
+                continue;
+            }
+            GameObject track = Instantiate(CommandManager.instance.trackPrefab, current, Quaternion.identity);
+            track.GetComponent<Track>().SetEndpoints(current, next);
+        }
     }
 
     public Vector3 FroggoFixedUpdate()
@@ -42,9 +54,10 @@ public class MovingPlatform : MonoBehaviour
             {
                 currentIndex = 0;
             }
+
             instructions[currentIndex].start();
         }
-        
+
         return instructions[currentIndex].step();
     }
 }

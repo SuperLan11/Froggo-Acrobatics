@@ -7,6 +7,14 @@ public class CommandManager : MonoBehaviour
     public static bool commandsEnabled = true;
     public TextMeshProUGUI command;
     private string commandBuffer = "";
+    public GameObject trackPrefab;
+    
+    public static CommandManager instance;
+    
+    private void Awake()
+    {
+        instance = this;
+    }
     
     void Update()
     {
