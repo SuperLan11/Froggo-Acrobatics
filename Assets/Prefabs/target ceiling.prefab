@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6621293406535232948, guid: 9451866abab5a734e80072a8b445726c, type: 3}
       propertyPath: m_Name
-      value: metal wall
+      value: target ceiling
       objectReference: {fileID: 0}
     - target: {fileID: 6621293406535232949, guid: 9451866abab5a734e80072a8b445726c, type: 3}
       propertyPath: m_Size.x
@@ -195,11 +195,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8819263507170816036, guid: e00f7144700e68547a655af3bb98f797, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: 0.5499988
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8819263507170816036, guid: e00f7144700e68547a655af3bb98f797, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.15999831
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8819263507170816036, guid: e00f7144700e68547a655af3bb98f797, type: 3}
       propertyPath: m_ConnectedRigidBody
