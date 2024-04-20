@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Win.unity
     guid: e1f605d182231e34faa137fbca263d4b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Main Menu Music.unity
     guid: 8b0c22957e77f9c4a83e4912762ea043
   - enabled: 1
