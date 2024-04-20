@@ -13076,6 +13076,11 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &821757875 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4714373058903166289, guid: 017b2fd49ce3dbc4dbe6c2731c2ad967, type: 3}
+  m_PrefabInstance: {fileID: 1557438055}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &824225067
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13320,6 +13325,10 @@ PrefabInstance:
     - target: {fileID: 4714373059645418166, guid: 017b2fd49ce3dbc4dbe6c2731c2ad967, type: 3}
       propertyPath: m_LocalPosition.y
       value: 10.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109403028992928500, guid: 017b2fd49ce3dbc4dbe6c2731c2ad967, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6109403028992928501, guid: 017b2fd49ce3dbc4dbe6c2731c2ad967, type: 3}
       propertyPath: m_LocalScale.x
@@ -23589,16 +23598,28 @@ PrefabInstance:
       value: 8.67
       objectReference: {fileID: 0}
     - target: {fileID: 3031177817746631743, guid: 017b2fd49ce3dbc4dbe6c2731c2ad967, type: 3}
+      propertyPath: targets.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3031177817746631743, guid: 017b2fd49ce3dbc4dbe6c2731c2ad967, type: 3}
+      propertyPath: movements.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3031177817746631743, guid: 017b2fd49ce3dbc4dbe6c2731c2ad967, type: 3}
+      propertyPath: targets.Array.data[1]
+      value: 
+      objectReference: {fileID: 821757875}
+    - target: {fileID: 3031177817746631743, guid: 017b2fd49ce3dbc4dbe6c2731c2ad967, type: 3}
       propertyPath: movements.Array.data[0]
       value: 4s
       objectReference: {fileID: 0}
     - target: {fileID: 3031177817746631743, guid: 017b2fd49ce3dbc4dbe6c2731c2ad967, type: 3}
       propertyPath: movements.Array.data[1]
-      value: 0s
+      value: 4s
       objectReference: {fileID: 0}
     - target: {fileID: 3031177817746631743, guid: 017b2fd49ce3dbc4dbe6c2731c2ad967, type: 3}
       propertyPath: movements.Array.data[2]
-      value: 4s
+      value: 0s
       objectReference: {fileID: 0}
     - target: {fileID: 3031177817746631743, guid: 017b2fd49ce3dbc4dbe6c2731c2ad967, type: 3}
       propertyPath: movements.Array.data[3]
