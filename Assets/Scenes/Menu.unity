@@ -826,6 +826,10 @@ PrefabInstance:
       propertyPath: scene
       value: Cutscene
       objectReference: {fileID: 0}
+    - target: {fileID: 1836441682750010395, guid: 0819a228b5b17d24ebd5e3b7fd76d21f, type: 3}
+      propertyPath: sceneIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2605268597271433116, guid: 0819a228b5b17d24ebd5e3b7fd76d21f, type: 3}
       propertyPath: m_Name
       value: Play
@@ -936,7 +940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5367361275031568072, guid: 0819a228b5b17d24ebd5e3b7fd76d21f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadScene
+      value: LoadSceneIndex
       objectReference: {fileID: 0}
     - target: {fileID: 5367361275031568072, guid: 0819a228b5b17d24ebd5e3b7fd76d21f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
