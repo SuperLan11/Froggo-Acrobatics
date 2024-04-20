@@ -46,6 +46,9 @@ TagManager:
   - name: fwc
     uniqueID: 1248841273
     locked: 0
+  - name: foreground
+    uniqueID: 3291315727
+    locked: 0
   - name: frog
     uniqueID: 3820693889
     locked: 0
