@@ -36,6 +36,10 @@ public class Frog : MonoBehaviour
 
     void Awake()
     {
+        if (isRecording())
+        {
+            Application.targetFrameRate = 30;
+        }
         if (isPrimary)
             instance = this;
     }
@@ -91,6 +95,17 @@ public class Frog : MonoBehaviour
         return inputsEffective() && Input.GetKey(keyCode);
     }
 
+    private bool isRecording()
+    {
+        
+        return false;
+    }
+
+    private void WriteRecordingFrame()
+    {
+        
+    }
+
     void Update()
     {
         if (state is State.Idle or State.WallTethered or State.TongueGrappling or State.Hanging)
@@ -101,6 +116,7 @@ public class Frog : MonoBehaviour
                 Jump();
             }
         }
+        
         leftPressed = GetKey(KeyCode.A) || GetKey(KeyCode.LeftArrow);
         rightPressed = GetKey(KeyCode.D) || GetKey(KeyCode.RightArrow);
 
@@ -575,8 +591,15 @@ public class Frog : MonoBehaviour
             state = State.Airborne;
             return;
         }
-        
-        AudioManager.instance.PlayJump();
+
+        if (isPrimary)
+        {
+            AudioManager.instance.PlayJump();
+        }
+        else
+        {
+            AudioManager.instance.PlayLittleJump();
+        }
         if (state == State.Hanging)
         {
             UngrabVine();

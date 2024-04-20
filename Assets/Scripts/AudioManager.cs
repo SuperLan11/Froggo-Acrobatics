@@ -10,6 +10,9 @@ public class AudioManager : MonoBehaviour
     public AudioSource deathSource;
     public AudioSource tongueHitSource;
     public AudioSource leverActivateSource;
+    public AudioSource littleJumpSource;
+    public AudioSource crashSource;
+    public AudioSource cutsceneMusicSource;
     void Awake()
     {
         instance = this;
@@ -48,5 +51,15 @@ public class AudioManager : MonoBehaviour
     public void PlayLeverActivate()
     {
         leverActivateSource.Play();
+    }
+
+    public void PlayLittleJump()
+    {
+        littleJumpSource.Play();
+    }
+
+    public void PlayCrash()
+    {
+        crashSource.Play();
     }
 }
