@@ -8,5 +8,6 @@ public class LevelSelectButton : MonoBehaviour
         Frog.selectedLevel = level;
         CommandManager.commandsEnabled = false;
         UnityEngine.SceneManagement.SceneManager.LoadScene("Real Game");
+        MainMenuMusic.instance.Stop();
     }
 }

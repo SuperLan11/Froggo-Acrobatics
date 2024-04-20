@@ -425,7 +425,6 @@ public class Frog : MonoBehaviour
 
         prevState = state;
         
-        Debug.Log(currentTetherAttach);
         FindObjectOfType<ParallaxBackground>().FroggoFixedUpdate();
         MovingPlatform myPlatform = currentTetherAttach == null ? null : currentTetherAttach.GetComponent<MovingPlatform>();
         foreach (MovingPlatform platform in FindObjectsOfType<MovingPlatform>())
