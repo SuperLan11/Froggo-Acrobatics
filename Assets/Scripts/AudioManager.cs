@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource checkpointCollectSource;
     public AudioSource deathSource;
     public AudioSource tongueHitSource;
+    public AudioSource leverActivateSource;
     void Awake()
     {
         instance = this;
@@ -42,5 +43,10 @@ public class AudioManager : MonoBehaviour
     public void PlayTongueHit()
     {
         tongueHitSource.Play();
+    }
+
+    public void PlayLeverActivate()
+    {
+        leverActivateSource.Play();
     }
 }

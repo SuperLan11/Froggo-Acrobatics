@@ -14,8 +14,10 @@ public class Lever : MonoBehaviour
     }
     public void Hit()
     {
+        if (flipping) return;
         wall.retracting = true;
         flipping = true;
+        AudioManager.instance.PlayLeverActivate();
     }
 
     public void ResetPos()
