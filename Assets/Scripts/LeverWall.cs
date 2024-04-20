@@ -21,7 +21,7 @@ public class LeverWall : MonoBehaviour
     {
         if (retracting)
         {
-            float speed = 0.07f;
+            float speed = 0.21f;
             transform.position += transform.up * (speed / 2);
             GetComponent<SpriteRenderer>().size += Vector2.down * speed;
             GetComponent<SpriteRenderer>().size = new Vector2(GetComponent<SpriteRenderer>().size.x,

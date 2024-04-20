@@ -13,6 +13,7 @@ public class Frog : MonoBehaviour
     public Tongue tongue;
     public Tongue tonguePreview;
     public GameObject mouthSpot;
+    public bool isPrimary = false;
 
     public enum State
     {
@@ -35,7 +36,8 @@ public class Frog : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
+        if (isPrimary)
+            instance = this;
     }
 
     public State state = State.Idle;
@@ -45,7 +47,7 @@ public class Frog : MonoBehaviour
         targetStartLocalPos = legTargets.transform.localPosition;
         armLegDistance = Mathf.Abs(armSpot.transform.position.x - legSpot.transform.position.x);
         respawnPoint = transform.position;
-        Time.timeScale = defaultTimeScale;
+        if (isPrimary) Time.timeScale = defaultTimeScale;
         gravityScale = rb.gravityScale;
         frontOldRotation = frontArm.transform.localRotation.eulerAngles.z;
         backOldRotation = backArm.transform.localRotation.eulerAngles.z;
@@ -63,21 +65,46 @@ public class Frog : MonoBehaviour
     }
 
     public float tongueReachMultiplier = 2f;
+    
+    private bool isShiftDown()
+    {
+        return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+    }
+
+    private bool inputsEffective()
+    {
+        return (isPrimary && !isShiftDown()) || (!isPrimary && isShiftDown());
+    }
+    
+    private bool GetMouseButtonDown(int i)
+    {
+        return inputsEffective() && Input.GetMouseButtonDown(i);
+    }
+    
+    private bool GetKeyDown(KeyCode keyCode)
+    {
+        return inputsEffective() && Input.GetKeyDown(keyCode);
+    }
+    
+    private bool GetKey(KeyCode keyCode)
+    {
+        return inputsEffective() && Input.GetKey(keyCode);
+    }
 
     void Update()
     {
         if (state is State.Idle or State.WallTethered or State.TongueGrappling or State.Hanging)
         {
             //HHH
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (GetKeyDown(KeyCode.Space))
             {
                 Jump();
             }
         }
-        leftPressed = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
-        rightPressed = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
+        leftPressed = GetKey(KeyCode.A) || GetKey(KeyCode.LeftArrow);
+        rightPressed = GetKey(KeyCode.D) || GetKey(KeyCode.RightArrow);
 
-        if (Input.GetMouseButtonDown(0) && state != State.TongueGrappling)
+        if (GetMouseButtonDown(0) && state != State.TongueGrappling)
         {
             AudioManager.instance.PlayTongueShoot();
             tongueActive = true;
@@ -95,7 +122,7 @@ public class Frog : MonoBehaviour
             UpdateTonguePreview();
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (GetKeyDown(KeyCode.R))
         {
             TeleportToLevel(currentLevel);
         }
@@ -357,7 +384,7 @@ public class Frog : MonoBehaviour
                 state = State.Airborne;
             }
 
-            if (Input.GetKey(KeyCode.Space))
+            if (GetKey(KeyCode.Space))
             {
                 rb.AddForce(jumpVector * Mathf.Pow(0.9f, airtime));
             }

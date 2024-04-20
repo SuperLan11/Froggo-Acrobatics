@@ -43,6 +43,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: merp
+    uniqueID: 1348933299
+    locked: 0
   - name: fwc
     uniqueID: 1248841273
     locked: 0
