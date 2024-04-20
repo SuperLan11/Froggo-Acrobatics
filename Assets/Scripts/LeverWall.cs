@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class LeverWall : MonoBehaviour
@@ -6,11 +7,8 @@ public class LeverWall : MonoBehaviour
     private Vector2 startSize;
     private Vector3 startPos;
     public bool retracting = false;
-    public void Start()
-    {
-        startPos = transform.position;
-        startSize = GetComponent<SpriteRenderer>().size;
-    }
+    private bool prevRetracting = false;
+    
     public void ResetPos()
     {
         retracting = false;
@@ -19,6 +17,11 @@ public class LeverWall : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (startPos == Vector3.zero)
+        {
+            startPos = transform.position;
+            startSize = GetComponent<SpriteRenderer>().size;
+        }
         if (retracting)
         {
             float speed = 0.21f;
@@ -27,5 +30,7 @@ public class LeverWall : MonoBehaviour
             GetComponent<SpriteRenderer>().size = new Vector2(GetComponent<SpriteRenderer>().size.x,
                 Mathf.Max(GetComponent<SpriteRenderer>().size.y, 0));
         }
+
+        prevRetracting = retracting;
     }
 }

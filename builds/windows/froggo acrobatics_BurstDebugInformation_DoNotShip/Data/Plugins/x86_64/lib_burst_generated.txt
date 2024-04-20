@@ -98,6 +98,11 @@ Library: lib_burst_generated
 --compilation-defines=NET_STANDARD_2_1
 --compilation-defines=NETSTANDARD
 --compilation-defines=NETSTANDARD2_1
+--compilation-defines=DEVELOPMENT_BUILD
+--compilation-defines=ENABLE_PROFILER
+--compilation-defines=DEBUG
+--compilation-defines=TRACE
+--compilation-defines=UNITY_ASSERTIONS
 --compilation-defines=ENABLE_CUSTOM_RENDER_TEXTURE
 --compilation-defines=ENABLE_DIRECTOR
 --compilation-defines=ENABLE_LOCALIZATION
@@ -124,6 +129,7 @@ Library: lib_burst_generated
 --compilation-defines=ENABLE_SPRITESHAPE_BURST
 --linker-options=PdbAltPath="froggo acrobatics_Data/Plugins/x86_64"
 --generate-link-xml=Temp\burst.link.xml
+--debug=Full
 --output=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Plugins\x86_64\lib_burst_generated
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\UnityEngine.UI.dll
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.VisualScripting.Flow.dll
@@ -134,14 +140,14 @@ Library: lib_burst_generated
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.2D.Animation.Runtime.dll
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.TextMeshPro.dll
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.Timeline.dll
+--root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Assembly-CSharp.dll
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.2D.SpriteShape.Runtime.dll
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.2D.PixelPerfect.dll
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.2D.Common.Runtime.dll
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.2D.IK.Runtime.dll
---root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Assembly-CSharp.dll
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.2D.Tilemap.Extras.dll
---root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.InternalAPIEngineBridge.001.dll
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.Recorder.dll
+--root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.InternalAPIEngineBridge.001.dll
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.Recorder.Base.dll
 --assembly-folder=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\
 --pdb-search-paths=Temp/ManagedSymbols/
@@ -249,6 +255,11 @@ Library: lib_burst_generated
 --compilation-defines=NET_STANDARD_2_1
 --compilation-defines=NETSTANDARD
 --compilation-defines=NETSTANDARD2_1
+--compilation-defines=DEVELOPMENT_BUILD
+--compilation-defines=ENABLE_PROFILER
+--compilation-defines=DEBUG
+--compilation-defines=TRACE
+--compilation-defines=UNITY_ASSERTIONS
 --compilation-defines=ENABLE_CUSTOM_RENDER_TEXTURE
 --compilation-defines=ENABLE_DIRECTOR
 --compilation-defines=ENABLE_LOCALIZATION
@@ -275,6 +286,7 @@ Library: lib_burst_generated
 --compilation-defines=ENABLE_SPRITESHAPE_BURST
 --linker-options=PdbAltPath="froggo acrobatics_Data/Plugins/x86_64"
 --generate-link-xml=Temp\burst.link.xml
+--debug=Full
 --output=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Plugins\x86_64\lib_burst_generated
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\UnityEngine.UI.dll
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.VisualScripting.Flow.dll
@@ -285,14 +297,14 @@ Library: lib_burst_generated
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.2D.Animation.Runtime.dll
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.TextMeshPro.dll
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.Timeline.dll
+--root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Assembly-CSharp.dll
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.2D.SpriteShape.Runtime.dll
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.2D.PixelPerfect.dll
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.2D.Common.Runtime.dll
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.2D.IK.Runtime.dll
---root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Assembly-CSharp.dll
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.2D.Tilemap.Extras.dll
---root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.InternalAPIEngineBridge.001.dll
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.Recorder.dll
+--root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.InternalAPIEngineBridge.001.dll
 --root-assembly=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\Unity.Recorder.Base.dll
 --assembly-folder=C:\Users\gerzy\Offline\froggo_acrobatics\froggo acrobatics\Temp\StagingArea\Data\Managed\
 --pdb-search-paths=Temp/ManagedSymbols/

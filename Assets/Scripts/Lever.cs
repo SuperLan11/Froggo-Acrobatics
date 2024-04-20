@@ -7,10 +7,17 @@ public class Lever : MonoBehaviour
     public GameObject leverHandle;
     private bool flipping;
     private float startRotation;
+    private int ignoreLayers = 1;
     
     public void Start()
     {
         startRotation = leverHandle.transform.eulerAngles.z;
+        //if (leverHandle == null)
+        //{
+            leverHandle = transform.Find("lever handle").gameObject;
+        //
+        //}
+        //leverHandle.transform.eulerAngles = new Vector3(0, 0, -45);
     }
     public void Hit()
     {
@@ -22,6 +29,10 @@ public class Lever : MonoBehaviour
 
     public void ResetPos()
     {
+        if (ignoreLayers-- > 0)
+        {
+            return;
+        }
         wall.ResetPos();
         flipping = false;
         leverHandle.transform.eulerAngles = new Vector3(0, 0, startRotation);
