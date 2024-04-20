@@ -14,6 +14,7 @@ public class Frog : MonoBehaviour
     public Tongue tonguePreview;
     public GameObject mouthSpot;
     public bool isPrimary = false;
+    public bool isCelebrating = false;
 
     public enum State
     {
@@ -56,7 +57,7 @@ public class Frog : MonoBehaviour
         frontOldRotation = frontArm.transform.localRotation.eulerAngles.z;
         backOldRotation = backArm.transform.localRotation.eulerAngles.z;
         
-        if (selectedLevel != 0) TeleportToLevel(selectedLevel);
+        if (selectedLevel != 0 && isPrimary) TeleportToLevel(selectedLevel);
     }
 
     private bool leftPressed;
@@ -77,7 +78,7 @@ public class Frog : MonoBehaviour
 
     private bool inputsEffective()
     {
-        return (isPrimary && !isShiftDown()) || (!isPrimary && isShiftDown());
+        return ((isPrimary && !isShiftDown()) || (!isPrimary && isShiftDown())) && !isCelebrating;
     }
     
     private bool GetMouseButtonDown(int i)
@@ -85,14 +86,19 @@ public class Frog : MonoBehaviour
         return inputsEffective() && Input.GetMouseButtonDown(i);
     }
     
+    private bool isMoodCelebrating()
+    {
+        return Frog.instance.currentLevel == 6;
+    }
+
     private bool GetKeyDown(KeyCode keyCode)
     {
-        return inputsEffective() && Input.GetKeyDown(keyCode);
+        return (inputsEffective() && Input.GetKeyDown(keyCode)) || (keyCode == KeyCode.Space && isCelebrating && isMoodCelebrating() && Time.realtimeSinceStartup % 0.5f < 0.25f);
     }
     
     private bool GetKey(KeyCode keyCode)
     {
-        return inputsEffective() && Input.GetKey(keyCode);
+        return (inputsEffective() && Input.GetKey(keyCode)) || (keyCode == KeyCode.Space && isCelebrating && isMoodCelebrating() && Time.realtimeSinceStartup % 0.5f < 0.25f);
     }
 
     private bool isRecording()
@@ -115,6 +121,12 @@ public class Frog : MonoBehaviour
             {
                 Jump();
             }
+        }
+
+        if (isCelebrating && isMoodCelebrating())
+        {
+            left = Frog.instance.transform.position.x < transform.position.x;
+            AdjustFlip();
         }
         
         leftPressed = GetKey(KeyCode.A) || GetKey(KeyCode.LeftArrow);
@@ -467,26 +479,31 @@ public class Frog : MonoBehaviour
         }
 
         prevState = state;
-        
-        FindObjectOfType<ParallaxBackground>().FroggoFixedUpdate();
-        MovingPlatform myPlatform = currentTetherAttach == null ? null : currentTetherAttach.GetComponent<MovingPlatform>();
-        foreach (MovingPlatform platform in FindObjectsOfType<MovingPlatform>())
+
+        if (isPrimary)
         {
-            Vector3 diff = platform.FroggoFixedUpdate();
-            if (platform.Equals(myPlatform))
+            FindObjectOfType<ParallaxBackground>().FroggoFixedUpdate();
+            MovingPlatform myPlatform =
+                currentTetherAttach == null ? null : currentTetherAttach.GetComponent<MovingPlatform>();
+            foreach (MovingPlatform platform in FindObjectsOfType<MovingPlatform>())
             {
-                //HHH
-                if (state == State.TongueGrappling)
+                Vector3 diff = platform.FroggoFixedUpdate();
+                if (platform.Equals(myPlatform))
                 {
-                    tongue.end += (Vector2) diff;
-                }
-                else if (state is State.WallTethered or State.WallTethering)
-                {
-                    wallAttachPoint += (Vector2) diff;
-                    transform.position += diff;
-                } else if (state == State.Hanging && ceilingHanging)
-                {
-                    transform.position += diff;
+                    //HHH
+                    if (state == State.TongueGrappling)
+                    {
+                        tongue.end += (Vector2)diff;
+                    }
+                    else if (state is State.WallTethered or State.WallTethering)
+                    {
+                        wallAttachPoint += (Vector2)diff;
+                        transform.position += diff;
+                    }
+                    else if (state == State.Hanging && ceilingHanging)
+                    {
+                        transform.position += diff;
+                    }
                 }
             }
         }

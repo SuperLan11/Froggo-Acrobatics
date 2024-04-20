@@ -10,6 +10,7 @@ public class LevelStart : Checkpoint
     void Awake()
     {
         levelStarts[level] = this;
+        if (level == 1)
         GetComponent<SpriteRenderer>().enabled = false;
     }
 
