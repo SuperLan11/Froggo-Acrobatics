@@ -8,5 +8,5 @@ The game has five levels and is the sequel to a previous Frog platformer I helpe
 Click the green code button, download the ZIP, and extract the folder. Then open the Game folder in the extracted folder, and open froggo acrobatics.exe to start the game.
 
 ## Credits
-Craig White - Programmer and Animator
-Landon Johnson - Level Designer, Artist, and Audio Designer
+- Craig White - Programmer and Animator
+- Landon Johnson - Level Designer, Artist, and Audio Designer
