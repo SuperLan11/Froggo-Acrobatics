@@ -2,7 +2,7 @@
 Froggo Acrobatics is a game created during the Florida Poly 2024 Game Jam which had the theme "hooked on." 
 Me and my teammate created the game in 72 hours for the event using Unity. 
 We continued working on the game and showcased it at the Florida Poly 2024 Game Expo roughly two months after.
-The game has five levels and is the sequel to a previous Frog platformer I helped make called Froggo Jump.
+The game has five levels and is the sequel to a previous frog platformer I helped make called Froggo Jump.
 
 ## How to Play the Game
 Click the green code button, download the ZIP, and extract the folder. Then open the Game folder in the extracted folder, and open froggo acrobatics.exe to start the game.
