@@ -6,6 +6,7 @@ The game has five levels and is the sequel to a previous frog platformer I helpe
 
 ## How to Play the Game
 Click the green code button, download the ZIP, and extract the folder. Then open the Game folder in the extracted folder, and open froggo acrobatics.exe to start the game.
+The game is also available at this link. https://gerzytet.itch.io/froggo-acrobatics
 
 ## Credits
 - Craig White - Programmer and Animator
